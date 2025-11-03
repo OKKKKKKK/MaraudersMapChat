@@ -1,5 +1,6 @@
 @import "../../../hp_theme.scss";
 
+// ✅ Full-screen container
 .hp-page {
   height: 100vh;
   width: 100vw;
@@ -10,126 +11,168 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 2vh;
+  padding: env(safe-area-inset-top) env(safe-area-inset-left)
+           env(safe-area-inset-bottom) env(safe-area-inset-right);
+  overflow: hidden; // no outside scroll
 }
 
-// scroll inside parchment only
+// ✅ Chat parchment
 .hp-chat {
   width: 95%;
   height: 95%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  padding: 20px 28px;
-  border-radius: 0;
-  background: transparent; // parchment already visible
+  background: transparent;
+  padding: 20px;
+  overflow: hidden; // prevent double scroll
 }
 
-// Header
+// ✅ Header
 .chat-header {
   background: rgba(30, 20, 10, 0.6);
   color: $hp-header-text;
-  padding: 12px 16px;
+  padding: 10px 14px;
   font-weight: 700;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   border-radius: 6px;
+  text-align: center;
+  flex-shrink: 0;
 }
 
-// Body inside parchment
+// ✅ Body
 .chat-body {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow: hidden; 
   position: relative;
-  padding: 12px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
 }
 
-// Messages scroll area
+// ✅ Scrollable messages
 .messages {
-  overflow-y: auto;
   flex: 1;
-  padding: 16px;
+  padding: 10px;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
+
+  // gracefully fade top and bottom
+  mask-image: linear-gradient(to bottom, transparent 0, black 15%, black 85%, transparent 100%);
 }
 
-// bubbles
 .msg {
   display: flex;
   align-items: flex-end;
 }
 
-.msg.user {
-  justify-content: flex-end;
-}
+.msg.user { justify-content: flex-end; }
+.msg.assistant { justify-content: flex-start; }
 
-.msg.assistant {
-  justify-content: flex-start;
-}
-
-// user bubble
-.msg.user .bubble {
-  background: $hp-accent;
-  color: #fff;
-}
-
-// assistant bubble (refined)
+// ✅ Assistant bubble
 .bubble {
-  max-width: 70%;
+  max-width: 75%;
   padding: 12px 14px;
   border-radius: 12px;
-  background: rgba(255, 245, 225, 0.7);
+  background: rgba(255, 245, 225, 0.75);
   border: 1px solid rgba(80, 60, 30, 0.5);
-  backdrop-filter: blur(3px);
+  backdrop-filter: blur(4px);
   color: #2c1f0f;
   font-family: "Georgia", serif;
+  font-size: 0.95rem;
+  word-wrap: break-word;
 }
 
+// ✅ User bubble
+.msg.user .bubble {
+  background: $hp-accent;
+  color: white;
+}
+
+// ✨ Spell sparkle animation
 .spell {
-  margin-left: 8px;
-  transform: translateY(-6px);
+  margin-left: 6px;
   animation: shimmer 1.6s infinite;
 }
 
-@keyframes shimmer {
-  0% { opacity: 0.7; transform: translateY(-6px) scale(1); }
-  50% { opacity: 1; transform: translateY(-10px) scale(1.1); }
-  100% { opacity: 0.7; transform: translateY(-6px) scale(1); }
-}
-
-// composer
+// ✅ Composer / Input box
 .composer {
   display: flex;
   gap: 8px;
-  padding: 12px;
+  padding: 8px 0;
+  flex-shrink: 0;
 }
 
 textarea {
   flex: 1;
   border-radius: 8px;
   padding: 10px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0,0,0,0.2);
+  font-size: 0.95rem;
+  max-height: 90px;
+  overflow-y: auto;
 }
 
 button {
-  min-width: 110px;
+  min-width: 90px;
   border-radius: 8px;
-  padding: 10px 14px;
+  padding: 10px;
 }
 
-// ✨ Footstep animation
+// 👣 Footstep wandering animation
 .footstep {
   position: absolute;
-  font-size: 20px;
-  opacity: 0.8;
+  font-size: 18px;
+  opacity: 0.85;
   animation: wander 6s linear infinite;
 }
 
 @keyframes wander {
   0%   { transform: translate(0,0) rotate(5deg); opacity: 0; }
   10%  { opacity: 1; }
-  50%  { transform: translate(80px, -60px) rotate(-10deg); }
-  100% { opacity: 0; transform: translate(150px, 50px) rotate(12deg); }
+  50%  { transform: translate(70px, -50px) rotate(-10deg); }
+  100% { opacity: 0; transform: translate(140px, 40px) rotate(10deg); }
+}
+
+// ✨ Shimmer effect
+@keyframes shimmer {
+  0% { opacity: .7; transform: translateY(-6px) scale(1); }
+  50% { opacity: 1; transform: translateY(-10px) scale(1.1); }
+  100% { opacity: .7; transform: translateY(-6px) scale(1); }
+}
+
+// 📱 Responsive adjustments
+@media (max-width: 768px) {
+  .hp-chat {
+    width: 100%;
+    height: 100%;
+    padding: 12px;
+  }
+
+  .bubble {
+    max-width: 85%;
+    font-size: 0.9rem;
+  }
+
+  button {
+    min-width: 80px;
+    padding: 8px;
+  }
+}
+
+@media (max-width: 420px) {
+  .chat-header {
+    font-size: 1rem;
+    padding: 8px;
+  }
+
+  textarea {
+    font-size: 0.85rem;
+  }
+
+  .bubble {
+    font-size: 0.85rem;
+    max-width: 90%;
+  }
 }
