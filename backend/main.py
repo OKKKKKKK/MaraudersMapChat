@@ -5,9 +5,14 @@ from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
+origins = [
+    "https://maraudersmapchat-ui-2.onrender.com",
+    "http://localhost:4200"
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:4200"],  # Angular dev server
+    allow_origins=origins,  # Angular dev server
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
