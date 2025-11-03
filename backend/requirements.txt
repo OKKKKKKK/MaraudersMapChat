@@ -1,0 +1,16 @@
+fastapi
+uvicorn
+
+python-dotenv
+
+# OpenAI official SDK
+openai==1.*
+
+# LangChain ecosystem
+langchain==0.3.*
+langchain-openai==0.2.*
+langchain-core==0.3.*
+langchain-text-splitters==0.3.*
+
+# Embeddings / vector memory
+numpy

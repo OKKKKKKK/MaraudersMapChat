@@ -1,0 +1,31 @@
+<div class="hp-page">
+  <div class="hp-chat">
+    <div class="chat-header">🗺️ Marauder's Map Chat</div>
+
+    <div class="chat-body">
+        <div class="ink-splash" *ngFor="let i of [].constructor(12)"></div>
+      <div class="messages">
+        <div *ngFor="let m of messages()" class="msg" [ngClass]="m.role">
+          <div class="bubble">
+            <div class="bubble answer-text">{{ m.text }}</div>
+          </div>
+          <div class="spell" *ngIf="m.role === 'assistant'">✨</div>
+        </div>
+      </div>
+
+      <div class="composer">
+        <textarea
+          [ngModel]="input()"
+          (ngModelChange)="updateInput($event)"
+          (keydown)="onKey($event)"
+          placeholder="Ask me anything, young wizard..."
+          rows="2"
+        ></textarea>
+
+        <button (click)="send()" [disabled]="loading()">
+          {{ loading() ? "Thinking…" : "Send" }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

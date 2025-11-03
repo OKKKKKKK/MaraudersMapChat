@@ -1,0 +1,57 @@
+# ---------------- Python ----------------
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+*.log
+
+# Virtual env
+env/
+venv/
+.venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Python env files
+*.env
+.env.*
+
+# ---------------- Angular / Node ----------------
+node_modules/
+dist/
+.angular/
+coverage/
+
+# Angular build cache
+.angular/cache/
+
+# Environment files
+*.env
+*.env.*local
+
+# ---------------- General ----------------
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ---------------- Python Cache (again to be safe) ----------------
+**/__pycache__/
+**/*.pyc
+
+# ---------------- Virtualenv Folder Under Backend Folder ----------------
+backend/**/venv/
+backend/**/.venv/

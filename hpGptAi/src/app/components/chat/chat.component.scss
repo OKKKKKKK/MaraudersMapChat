@@ -1,0 +1,135 @@
+@import "../../../hp_theme.scss";
+
+.hp-page {
+  height: 100vh;
+  width: 100vw;
+  background: url("../../../assets/hp_bg_image.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2vh;
+}
+
+// scroll inside parchment only
+.hp-chat {
+  width: 95%;
+  height: 95%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px 28px;
+  border-radius: 0;
+  background: transparent; // parchment already visible
+}
+
+// Header
+.chat-header {
+  background: rgba(30, 20, 10, 0.6);
+  color: $hp-header-text;
+  padding: 12px 16px;
+  font-weight: 700;
+  font-size: 1.2rem;
+  border-radius: 6px;
+}
+
+// Body inside parchment
+.chat-body {
+  flex: 1;
+  position: relative;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+// Messages scroll area
+.messages {
+  overflow-y: auto;
+  flex: 1;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+// bubbles
+.msg {
+  display: flex;
+  align-items: flex-end;
+}
+
+.msg.user {
+  justify-content: flex-end;
+}
+
+.msg.assistant {
+  justify-content: flex-start;
+}
+
+// user bubble
+.msg.user .bubble {
+  background: $hp-accent;
+  color: #fff;
+}
+
+// assistant bubble (refined)
+.bubble {
+  max-width: 70%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: rgba(255, 245, 225, 0.7);
+  border: 1px solid rgba(80, 60, 30, 0.5);
+  backdrop-filter: blur(3px);
+  color: #2c1f0f;
+  font-family: "Georgia", serif;
+}
+
+.spell {
+  margin-left: 8px;
+  transform: translateY(-6px);
+  animation: shimmer 1.6s infinite;
+}
+
+@keyframes shimmer {
+  0% { opacity: 0.7; transform: translateY(-6px) scale(1); }
+  50% { opacity: 1; transform: translateY(-10px) scale(1.1); }
+  100% { opacity: 0.7; transform: translateY(-6px) scale(1); }
+}
+
+// composer
+.composer {
+  display: flex;
+  gap: 8px;
+  padding: 12px;
+}
+
+textarea {
+  flex: 1;
+  border-radius: 8px;
+  padding: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+button {
+  min-width: 110px;
+  border-radius: 8px;
+  padding: 10px 14px;
+}
+
+// ✨ Footstep animation
+.footstep {
+  position: absolute;
+  font-size: 20px;
+  opacity: 0.8;
+  animation: wander 6s linear infinite;
+}
+
+@keyframes wander {
+  0%   { transform: translate(0,0) rotate(5deg); opacity: 0; }
+  10%  { opacity: 1; }
+  50%  { transform: translate(80px, -60px) rotate(-10deg); }
+  100% { opacity: 0; transform: translate(150px, 50px) rotate(12deg); }
+}

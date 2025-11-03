@@ -1,0 +1,149 @@
+/* --------------------------
+   Magical Harry Potter Theme
+--------------------------- */
+
+/* ✅ Import Angular Material baseline */
+@use '@angular/material' as mat;
+@include mat.core();
+
+/* ✅ Harry Potter Font */
+@font-face {
+  font-family: "HarryP";
+  src: url("/assets/fonts/HARRYP__.TTF");
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden; /* ❗ stop unwanted scroll */
+  background: #000;
+  font-family: "Montserrat", sans-serif;
+  color: #fff;
+}
+
+/* ✅ Hogwarts Background */
+.chat-body {
+  background-image: url("/assets/bg-hogwarts.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ✅ Candle Flicker Glow */
+.chat-body::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(255,215,160,0.2) 0%, transparent 60%);
+  animation: flicker 4s infinite ease-in-out;
+}
+
+@keyframes flicker {
+  0%,100% { opacity: 0.8; }
+  50%     { opacity: 0.4; }
+}
+
+/* ✅ Magical Ink Splash Particles */
+@keyframes floatParticles {
+  from { transform: translateY(0) scale(1); opacity: 0.6; }
+  to   { transform: translateY(-120px) scale(1.4); opacity: 0; }
+}
+
+.ink-splash {
+  position: absolute;
+  bottom: 10%;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: rgba(200,150,255,0.7);
+  animation: floatParticles 4s infinite;
+  filter: blur(1px);
+}
+
+/* Auto-generate random splashes */
+@for $i from 1 through 12 {
+  .ink-splash:nth-child(#{$i}) {
+    left: random(100) * 1%;
+    animation-delay: #{random(6)}s;
+  }
+}
+
+/* ✅ Answer Ink Fade */
+.answer-text {
+  font-family: "HarryP", serif;
+  font-size: 22px;
+  animation: inkReveal 2s ease forwards;
+  opacity: 0;
+}
+
+@keyframes inkReveal {
+  0%   { opacity: 0; filter: blur(4px); }
+  50%  { opacity: 0.6; }
+  100% { opacity: 1; filter: blur(0); }
+}
+
+/* ✅ Chat Bubbles */
+.bubble {
+  background: rgba(20,20,20,0.55);
+  border: 1px solid rgba(255,255,255,0.12);
+  backdrop-filter: blur(8px);
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 15px;
+}
+
+/* ✅ Text area & button tweak */
+textarea {
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  border: 1px solid #947f5e;
+}
+
+button {
+  font-family: "HarryP";
+  font-size: 18px;
+  background: #947f5e;
+  color: #000;
+  border-radius: 8px;
+  padding: 6px 14px;
+}
+
+/*
+   ✅ Utility classes
+------------------------------- */
+
+.d-flex { display: flex; }
+.flex-col { flex-direction: column; }
+.justify-center { justify-content: center; }
+.align-center { align-items: center; }
+.gap-1 { gap: 6px; }
+.gap-2 { gap: 12px; }
+.text-center { text-align: center; }
+
+/* Harry Potter accent text */
+.hp-text {
+  font-family: "HarryP";
+  font-size: 28px;
+}
+
+/* Chocolate Frog Jump 🐸✨ */
+.frog {
+  width: 60px;
+  animation: frogJump 4s infinite;
+}
+
+@keyframes frogJump {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50%      { transform: translateY(-40px) scale(1.1); }
+}
