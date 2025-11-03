@@ -29,7 +29,12 @@
               {
                 "glob": "**/*",
                 "input": "public",
-                "src/_redirects"
+                "output": "/"
+              },
+              {
+                "glob": "_redirects",
+                "input": "src",
+                "output": "/"
               }
             ],
             "styles": [
@@ -90,7 +95,12 @@
               {
                 "glob": "**/*",
                 "input": "public",
-                "src/_redirects"
+                "output": "/"
+              },
+              {
+                "glob": "_redirects",
+                "input": "src",
+                "output": "/"
               }
             ],
             "styles": [
