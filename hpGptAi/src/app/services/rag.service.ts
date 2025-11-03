@@ -6,7 +6,9 @@ import { Injectable } from '@angular/core';
 export class RagService {
   constructor() {}
 
-  base = 'http://localhost:8000';
+  base = window.location.hostname === 'localhost'
+  ? 'http://localhost:8000'
+  : 'https://maraudersmapchat.onrender.com/';
 
   async query(q: string) {
     const res = await fetch(this.base + '/ask', {
